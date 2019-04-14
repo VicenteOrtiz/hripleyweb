@@ -8,7 +8,8 @@ class Product extends Model
 {
     protected $fillable=[
     	'description',
-    	'price'
+    	'price',
+    	'sku'
     ];
 
     public function label(){

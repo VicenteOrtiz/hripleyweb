@@ -15,6 +15,14 @@ class CreatePaymentMethodsTable extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('bankName');
+            $table->string('cardNumber');
+            $table->smallInteger('cvv');
+            $table->smallInteger('month');
+            $table->smallInteger('year');
+
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

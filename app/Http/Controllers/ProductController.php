@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client as GuzzleClient;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -27,5 +28,45 @@ class ProductController extends Controller
 		$response = $client->get('https://clripley-qa.azure-api.net/productos/api/Producto/12?ean13=' . $sku);
 
 		return $response;
+    }
+
+    public function findProductBySku($sku)
+    {
+        $products = Product::all();
+
+        foreach ($products as $product){
+            if ($product->sku == $sku){
+                return $product;
+            }
+        }
+
+        return NULL;
+    }
+
+    public function wasPaid($sku)
+    {
+        $products = Product::all();
+
+        foreach ($products as $product){
+            if ($product->sku == $sku){
+                $product->delete();
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+
+    public function findBySkuArduino($sku)
+    {
+        $products = Product::all();
+
+        foreach ($products as $product){
+            if ($product->sku == $sku){
+                return 1;
+            }
+        }
+
+        return 0;
     }
 }

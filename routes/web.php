@@ -18,6 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/product/{sku}', 'ProductController@productoTienda');
+// Route::get('/product/{sku}', 'ProductController@productoTienda');
 
 
+Route::get('/findProductOnPhone/{sku}', 'ProductController@findProductBySku');
+Route::get('/deleteAfterPay/{sku}', 'ProductController@wasPaid');
+Route::get('/findProductWithArduino/{sku}', 'ProductController@findBySkuArduino');
